@@ -5,21 +5,21 @@ define("DB", "sistema");
 define("PASSWORD", "12345678");
 class Connect
 {
-    private static $connection;
+    private static $instance;
     public function __construct()
     {
-        self::connection_database();
     }
 
-    private static function connection_database()
+    public static function connection_database()
     {
-
-        try {
-            self::$connection = new PDO("mysql:host = " . LOCALHOST . "; dbname =  " . DB, USER, PASSWORD);
-            self::$connection->exec("USE sistema");
-        } catch (\PDOException $th) {
-            die();
+        if (!isset(self::$instance)) {
+            try {
+                self::$instance = new PDO("mysql:host = " . LOCALHOST . "; dbname =  " . DB, USER, PASSWORD);
+                self::$instance->exec("USE sistema");
+            } catch (\PDOException $th) {
+                die();
+            }
         }
-        return self::$connection;
+        return self::$instance;
     }
 }

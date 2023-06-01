@@ -4,7 +4,7 @@
   {
 
 
-    public function index()
+    public function index($email, $password)
     {
       $this->loadingTemplate("Home");
     }

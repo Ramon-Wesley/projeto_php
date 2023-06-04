@@ -18,8 +18,7 @@ class Core
 
         if (!empty($url)) {
             $url = explode("/", $url);
-            $controller = $url[0] . "Controller";
-            print_r($controller);
+            $controller = ucfirst($url[0] . "Controller");
             array_shift($url);
             if (!empty($url[0]) && isset($url[0])) {
                 $method = $url[0];
@@ -34,7 +33,7 @@ class Core
             }
         } else {
             $parameters = array();
-            $controller = "HomeController";
+            $controller = "DashboardController";
             $method = "index";
         }
         $path = "controllers/" . $controller . ".php";

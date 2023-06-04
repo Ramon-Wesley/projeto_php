@@ -1,10 +1,9 @@
 <?php
-echo "OK";
-$c = new UserController();
 if ($_POST['email']) {
-    $c->sign($_POST['email'], $_POST['password']);
+    $this->sign($_POST['email'], $_POST['password']);
 }
-?><div class="container d-flex justify-content-center vh-100 align-items-center">
+?>
+<div class="container d-flex justify-content-center vh-100 align-items-center">
     <form class="d-flex gap-2 row p-4  rounded flex-column align-items-center border border-dark-subtle justify-content-center " method="post" action="">
         <div class=" col-sm-12 text-light d-flex justify-content-center">
             <h3>Login </h3>

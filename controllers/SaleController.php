@@ -10,9 +10,9 @@ class SaleController extends Controller
         if (!isset($_SESSION['email'])) {
             header("Location: http://localhost/projeto_php/User");
         }
-        $this->loadingTemplate("FormSale", array(), array(
-            'janeiro', 'feveriro', 'marco ', 'abril', 'maio', 'junho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-
-        ));
+        $dates = array();
+        $sale = new SaleModel();
+        //$dates = $sale->sale_items();
+        $this->loadingTemplate("FormSale", $dates, $dates);
     }
 }

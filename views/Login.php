@@ -1,6 +1,6 @@
 <?php
 if ($_POST['email']) {
-    $this->sign($_POST['email'], $_POST['password']);
+    $this->signIn($_POST['email'], $_POST['password']);
 }
 ?>
 <div class="container d-flex justify-content-center vh-100 align-items-center">

@@ -22,18 +22,31 @@ class AddressModel
         return $result;
     }
 
-    public function create(string $cep, string $state, string  $city, string $neighborhood, string  $street, string $number, string  $complement)
+    public function create($values = array())
     {
-        $stmt = $this->connection->prepare("INSERT INTO endereco(cep,estado,cidade,bairro,rua,numero,complemento) VALUES (:cep,:estado,:cidade,:bairro,:rua,:numero,:complemento)");
 
-        $stmt->bindValue(":cep", $cep);
-        $stmt->bindValue(":estado", $state);
-        $stmt->bindValue(":cidade", $city);
-        $stmt->bindValue(":bairro", $neighborhood);
-        $stmt->bindValue(":rua", $street);
-        $stmt->bindValue(":numero", $number);
-        $stmt->bindValue(":complemento", $complement);
-        $stmt->execute();
+        try {
+            /* 'Cep' => 'text',
+            'estado' => 'text',
+            'cidade' => 'text',
+            'bairro' => 'text',
+            'rua' => 'text',
+            'numero' => 'text',
+            'complemento' => 'text'...*/
+            $stmt = $this->connection->prepare("INSERT INTO endereco(cep,estado,cidade,bairro,rua,numero,complemento) VALUES (:cep,:estado,:cidade,:bairro,:rua,:numero,:complemento)");
+
+            $stmt->bindValue(":cep", $values['Cep']);
+            $stmt->bindValue(":estado", $values['estado']);
+            $stmt->bindValue(":cidade", $values['cidade']);
+            $stmt->bindValue(":bairro", $values['bairro']);
+            $stmt->bindValue(":rua", $values['rua']);
+            $stmt->bindValue(":numero", $values['numero']);
+            $stmt->bindValue(":complemento", $values['complemento']);
+            $stmt->execute();
+            return  $this->connection->lastInsertId();
+        } catch (\PDOException $th) {
+            return "endereco: " . $th;
+        }
     }
     public function deleteById(int $id)
     {
@@ -43,20 +56,25 @@ class AddressModel
     }
 
 
-    public function updateById(int $id, string $cep, string $state, string  $city, string $neighborhood, string  $street, string $number, string  $complement)
+    public function updateById(int $id, $values = array())
     {
-        $stmt = $this->connection->prepare("UPDATE endereco WHERE SET cep=:cep,estado= :estado,cidade= :cidade,bairro= :bairro,rua= :rua,numero= :numero,complemento= :complemento) WHERE id= :id");
+        try {
+            $stmt = $this->connection->prepare("UPDATE endereco SET cep = :cep, estado = :estado, cidade = :cidade, bairro = :bairro, rua = :rua, numero = :numero, complemento = :complemento WHERE id = :id");
 
-        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-        $stmt->bindValue(":cep", $cep);
-        $stmt->bindValue(":estado", $state);
-        $stmt->bindValue(":cidade", $city);
-        $stmt->bindValue(":bairro", $neighborhood);
-        $stmt->bindValue(":rua", $street);
-        $stmt->bindValue(":numero", $number);
-        $stmt->bindValue(":complemento", $complement);
-        $stmt->execute();
+            $stmt->bindValue(":cep", $values['cep']);
+            $stmt->bindValue(":estado", $values['estado']);
+            $stmt->bindValue(":cidade", $values['cidade']);
+            $stmt->bindValue(":bairro", $values['bairro']);
+            $stmt->bindValue(":rua", $values['rua']);
+            $stmt->bindValue(":numero", $values['numero']);
+            $stmt->bindValue(":complemento", $values['complemento']);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            return "Erro ao atualizar o registro"; // Propague a exceção para que possa ser tratada em um nível superior, se necessário
+        }
     }
+
     public function getById(int $id)
     {
         $stmt = $this->connection->prepare("SELECT * FROM endereco WHERE id = :id");

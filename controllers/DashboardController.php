@@ -8,9 +8,15 @@
     {
       session_start();
       if (!isset($_SESSION['email'])) {
-        header("Location: http://localhost/projeto_php/User");
+        $_SESSION['email'];
+        header("Location: http://localhost/projeto_php/login");
       }
-      $this->loadingTemplate("Dashboard", array(), array(
+      $buyModel = new BuyModel();
+      $datab = $buyModel->saleSum();
+      $saleModel = new SaleModel();
+      $datas = $saleModel->saleSum();
+      $data = array($datas, $datab);
+      $this->loadingTemplate("Dashboard", $data, array(
         'janeiro', 'feveriro', 'marco ', 'abril', 'maio', 'junho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
 
       ));

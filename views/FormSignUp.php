@@ -16,4 +16,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
-</div>
+</div>/opt/lampp/htdocs/projeto_php/models

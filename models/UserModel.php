@@ -14,25 +14,24 @@ class UserModel
         $this->tableName = "usuario";
     }
 
-    public function signIn(
-        string $email,
-        string $password
-    ) {
-
-
+    public function signIn(string $email, string $password)
+    {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM usuario WHERE email = :email ");
+            $stmt = $this->connection->prepare("SELECT * FROM usuario WHERE email = :email");
             $stmt->bindValue(':email', $email);
             $stmt->execute();
-            $result = array();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if (password_verify($password, $result[0]['senha'])) {
+
+            if (count($result) > 0 && password_verify($password, $result[0]['senha'])) {
                 return $result;
+            } else {
+                return "Usuário ou senha incorretos!";
             }
-        } catch (\PDOException $th) {
-            echo "erro:  " . $th;
+        } catch (\PDOException $e) {
+            return "Erro ao conectar ao banco de dados: ";
         }
     }
+
     public function SignUp(
         $email,
         $password
@@ -45,7 +44,7 @@ class UserModel
             $stmt->execute();
             //code...
         } catch (\PDOException $th) {
-            echo "erro:  " . $th;
+            return "erro:  " . $th;
         }
     }
 }

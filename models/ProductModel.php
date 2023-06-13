@@ -81,7 +81,7 @@ class ProductModel
             $stmt->bindValue(":valor_unitario", $valor_unitario);
             $stmt->execute();
 
-            var_dump("Registro atualizado com sucesso!");
+            return "Registro atualizado com sucesso!";
         } catch (PDOException $e) {
             // Tratar a exceção aqui, como exibir uma mensagem de erro ou registrar em um log
             return "Erro ao atualizar o produto: ";

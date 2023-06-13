@@ -83,7 +83,7 @@
 
 <script>
     function sair() {
-        window.location.href = "login.php";
+        window.location.href = "http://localhost/projeto_php/login.php";
     }
 </script>
 </script>

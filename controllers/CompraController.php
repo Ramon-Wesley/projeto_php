@@ -21,7 +21,8 @@ class CompraController extends Controller
     public function cadastrar()
     {
         $labels = array('CNPJ', 'Fornecedor', 'Compra');
-        $this->loadingTemplate("FormBuy-Sale", array(), $labels);
+        $data['title'] = 'compra';
+        $this->loadingTemplate("FormBuy-Sale", $data, $labels);
     }
 
     public function create(

@@ -98,6 +98,7 @@ if (!empty($this->data)) {
         <?php endif; ?>
     </ul>
 </nav>
+<a href="http://localhost/projeto_php/<?= $this->data2['title']; ?>/cadastrar" class="btn btn-primary">Ir para o cadastro</a>
 
 <script>
     function excluir(id) {

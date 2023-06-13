@@ -68,7 +68,7 @@ class FornecedorController extends Controller
             'numero' => 'text',
             'complemento' => 'text'
         );
-
+        $data['title'] = 'fornecedor';
         $this->loadingTemplate("GeralForm", $data, $inputs);
     }
 
@@ -77,7 +77,9 @@ class FornecedorController extends Controller
         session_start();
 
         $errors = array();
-
+        if (empty($values['CNPJ']) || !$this->validarCNPJ($values['CNPJ'])) {
+            $errors['CNPJ'] = 'CNPJ invalido.';
+        }
         if (empty($values['Nome'])) {
             $errors['Nome'] = 'Nome é obrigatório.';
         }

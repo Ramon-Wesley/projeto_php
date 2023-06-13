@@ -1,8 +1,8 @@
-<div style="width: 50%;">
+<div style="width: 45%; margin-right: 15px;">
     <h4>Vendas</h4>
     <canvas id="myChart1"></canvas>
 </div>
-<div style="width: 50%; ">
+<div style="width: 45%; margin-left: 15px;">
     <h4>Compras</h4>
     <canvas id="myChart2"></canvas>
 </div>

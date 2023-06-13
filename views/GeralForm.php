@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!empty($this->data2)) {
     $keys = array_keys($this->data2);
     $lengthKey = count($keys);
@@ -18,8 +19,7 @@ function sanitizeString($value)
 }
 ?>
 <div class="container">
-    <!-- Adicione antes do botão "Cadastrar" -->
-
+    <?php  ?>
     <div id="error-message" class="alert alert-danger" style="display: none;"></div>
     <div id="success-message" class="alert alert-success" style="display: none;"></div>
 
@@ -42,7 +42,7 @@ function sanitizeString($value)
             </div>
         </div>
         <div class="row">
-            <h2>Cadastro</h2>
+            <h2>Cadastro de <?php echo $this->data['title'] ?></h2>
             <div class="col-mb-12 d-flex flex-wrap gap-2 align-items-center">
                 <?php
                 if (!empty($lengthKey)) {
@@ -74,9 +74,16 @@ function sanitizeString($value)
                 ?>
             </div>
         </div>
-        <!-- Adicione o atributo data-bs-toggle e data-bs-target -->
-        <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#confirmModal">Cadastrar</button>
-        <input type="hidden" name="confirmar" value="1">
+
+        <div class="d-flex" style="align-items: center; gap:2px;">
+            <a href="http://localhost/projeto_php/<?php echo $this->data['title'] ? $this->data['title'] : 'produto' ?>">
+
+                <button type="button" class="btn btn-danger mt-2">Voltar</button>
+            </a>
+
+            <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#confirmModal">Cadastrar</button>
+            <input type="hidden" name="confirmar" value="1">
+        </div>
     </form>
 </div>
 
@@ -97,17 +104,7 @@ function sanitizeString($value)
             }, 2000);
         }
 
-        <?php if (empty($res)) { ?> // Verifica se não há erros
-            var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal')); // Cria uma instância do modal
 
-            var confirmButton = document.getElementById('confirmButton'); // Adicione um id ao botão "Confirmar" do modal
-            confirmButton.addEventListener('click', function() {
-                document.getElementById('cadastroForm').submit(); // Submete o formulário
-                confirmModal.hide(); // Oculta o modal
-            });
-
-            confirmModal.show(); // Exibe o modal
-        <?php } ?>
     });
 </script>
 <?php if (!empty($res) && isset($res['error'])) { ?>
@@ -149,4 +146,6 @@ function sanitizeString($value)
     </script>
 <?php } ?>
 
-<script src="/projeto_php/js/GeralForm.js"></script>
+<script src="/projeto_php/js/GeralForm.js">
+
+</script>

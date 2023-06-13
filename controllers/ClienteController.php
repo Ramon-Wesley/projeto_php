@@ -38,6 +38,7 @@ class ClienteController extends Controller
 
             if (!empty($data)) {
                 $values = array(
+                    'title' => 'cliente',
                     'CPF' => $data['cpf'],
                     'Nome' => $data['nome'],
                     'Email' => $data['email'],
@@ -66,6 +67,7 @@ class ClienteController extends Controller
             'numero' => 'text',
             'complemento' => 'text'
         );
+        $data['title'] = 'cliente';
         $this->loadingTemplate("GeralForm", $data, $inputs);
     }
     public function create($values = array())

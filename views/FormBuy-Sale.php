@@ -18,7 +18,6 @@ function sanitizeString($value)
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 ?>
-
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
@@ -95,7 +94,13 @@ function sanitizeString($value)
             <label for="valorTotalProdutos">Valor Total dos Produtos:</label>
             <input type="text" class="form-control" id="total_value" name="total_value" readonly>
         </div>
-        <input type="submit" class="btn btn-success" name="submit" value="Confirmar <?php echo $this->data2[2] ?>" />
+        <div class="d-flex">
+
+            <a class="btn btn-danger" href="http://localhost/projeto_php/<?php echo $this->data['title'] ?>">
+                Voltar
+            </a>
+            <input type="submit" class="btn btn-success" name="submit" value="Confirmar <?php echo $this->data2[2] ?>" />
+        </div>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -168,7 +173,7 @@ function sanitizeString($value)
         }, 500));
 
         function exibirResultadoproduct(suggestions) {
-            productAutocomplete.html(""); // Limpar as sugestões anteriores
+            productAutocomplete.html("");
             console.log(suggestions);
             if (suggestions.length > 0) {
                 suggestions.forEach(function(suggestion) {
@@ -180,16 +185,16 @@ function sanitizeString($value)
                         amount.attr('max', suggestion.quantidade);
                         amount.val(1);
                         previousAmount = 1;
-                        productAutocomplete.html(""); // Limpar as sugestões ao selecionar uma
+                        productAutocomplete.html("");
                         productAutocomplete.addClass("d-none");
                     });
                     li.append(a);
                     productAutocomplete.append(li);
                 });
 
-                productAutocomplete.removeClass("d-none"); // Exibir as sugestões
+                productAutocomplete.removeClass("d-none");
             } else {
-                productAutocomplete.addClass("d-none"); // Ocultar as sugestões se não houver nenhuma
+                productAutocomplete.addClass("d-none");
             }
         }
     });
@@ -218,7 +223,7 @@ function sanitizeString($value)
         }, 500));
 
         function exibirResultadocpf(suggestions) {
-            autocomplete.html(""); // Limpar as sugestões anteriores
+            autocomplete.html("");
             console.log(suggestions);
             if (suggestions.length > 0) {
                 suggestions.forEach(function(suggestion) {
@@ -229,7 +234,7 @@ function sanitizeString($value)
                         nameInput.val(suggestion['nome']);
                         previousAmount = 1
                         nameInput.focus();
-                        autocomplete.html(""); // Limpar as sugestões ao selecionar uma
+                        autocomplete.html("");
                         autocomplete.addClass("d-none");
 
                     });
@@ -237,9 +242,10 @@ function sanitizeString($value)
                     autocomplete.append(li);
                 });
 
-                autocomplete.removeClass("d-none"); // Exibir as sugestões
+                autocomplete.removeClass("d-none");
+
             } else {
-                autocomplete.addClass("d-none"); // Ocultar as sugestões se não houver nenhuma
+                autocomplete.addClass("d-none");
             }
         }
 
@@ -248,7 +254,7 @@ function sanitizeString($value)
     $(document).ready(function() {
 
     });
-    //Neste código, adicionamos um evento de input ao campo de CPF(cpfInput) para acionar a requisição AJAX e obter as sugestões de autocomplete.Em seguida, usamos a função exibirResultado() para mostrar as sugestões retornadas pelo servidor.Quando o usuário seleciona uma sugestão, o valor é preenchido no campo de CPF(cpfInput) e o foco é movido para o campo de nome(nameInput).Além disso, também atualizamos o CSS para mostrar e ocultar corretamente a lista de sugestões de autocomplete.
+
 
     function adicionarProduto() {
         var nomeProduto = document.getElementById("product").value;

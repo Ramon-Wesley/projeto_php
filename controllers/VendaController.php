@@ -56,7 +56,8 @@ class VendaController extends Controller
         //     $data[0] += ['categories' => $categories];
         //   $this->loadingTemplate("GeralForm", $data[0], $inputs);
         $labels = array('CPF', 'Cliente', 'Venda');
-        $this->loadingTemplate("FormBuy-Sale", array(), $labels);
+        $data['title'] = 'venda';
+        $this->loadingTemplate("FormBuy-Sale", $data, $labels);
     }
     public function create(
         $valuesBuy = array(),
